@@ -1,0 +1,58 @@
+{
+  "_from": "@types/react-data-grid@^2.0.7",
+  "_id": "@types/react-data-grid@2.0.7",
+  "_inBundle": false,
+  "_integrity": "sha512-oWCkX7lnHv+xzZobIyY96JulVKIMP/1ma8It9AKSgMZQWRt7lEFfnnBvBwrVcUxEM8Kgowpu4rTyiqyxsCIzXw==",
+  "_location": "/@types/react-data-grid",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "@types/react-data-grid@^2.0.7",
+    "name": "@types/react-data-grid",
+    "escapedName": "@types%2freact-data-grid",
+    "scope": "@types",
+    "rawSpec": "^2.0.7",
+    "saveSpec": null,
+    "fetchSpec": "^2.0.7"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@types/react-data-grid/-/react-data-grid-2.0.7.tgz",
+  "_shasum": "d6400f1217836ed5c4157e8356c977bb3f1e452e",
+  "_spec": "@types/react-data-grid@^2.0.7",
+  "_where": "/Users/arimuraterutoshi/mywork/develop/scala/newscalaping/front/view",
+  "bundleDependencies": false,
+  "contributors": [
+    {
+      "name": "Simon Gellis",
+      "url": "https://github.com/SupernaviX"
+    },
+    {
+      "name": "Kieran Peat",
+      "url": "https://github.com/KieranPeat"
+    },
+    {
+      "name": "Martin Novak",
+      "url": "https://github.com/martinnov92"
+    }
+  ],
+  "dependencies": {
+    "@types/react": "*"
+  },
+  "deprecated": false,
+  "description": "TypeScript definitions for react-data-grid",
+  "license": "MIT",
+  "main": "",
+  "name": "@types/react-data-grid",
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/DefinitelyTyped/DefinitelyTyped.git"
+  },
+  "scripts": {},
+  "typeScriptVersion": "2.3",
+  "typesPublisherContentHash": "fde57c1fac1dde6b979e11bd7335e5ba07c06f40a5ce23b547b8816889138aca",
+  "version": "2.0.7"
+}

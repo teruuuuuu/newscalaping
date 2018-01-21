@@ -1,0 +1,4 @@
+{
+  "USER_LIST_INIT": "/static/dummy.json"
+  , "TOP_INFO": "http://localhost:9000/tops"
+}
