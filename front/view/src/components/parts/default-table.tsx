@@ -90,7 +90,7 @@ export const DefaultTable: React.StatelessComponent<Props> = (props) => {
     };
 
     function showPageLink(linksArray: Array<any>, index:number, pageVol: number, clickPage: (i:number) => any) {
-        const pageNum = linksArray.length / pageVol
+        const pageNum = Math.floor(linksArray.length / pageVol) + 1
         const headLinks = []
         const middleLinks = []
         const tailLinks = []
@@ -136,8 +136,8 @@ export const DefaultTable: React.StatelessComponent<Props> = (props) => {
     function contentElement(content: any, index: number, headerInfo: Array<any>) {
         const elem = headerInfo.map((header: any, i: number) => {
           switch( header.type) {
-              case "delete": return <TableRowColumn  style={header.colStyle}>{"×"}</TableRowColumn>
-              default: return <TableRowColumn  style={header.colStyle}>{content[header.key]}</TableRowColumn>
+              case "delete": return <TableRowColumn key={"key" + i}  style={header.colStyle}>{"×"}</TableRowColumn>
+              default: return <TableRowColumn  key={"key" + i} style={header.colStyle}>{content[header.key]}</TableRowColumn>
           }})
         return (
             <TableRow key={"contents"+index} style={{color: "inherit"}}>{elem}</TableRow>)

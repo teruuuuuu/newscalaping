@@ -3,7 +3,7 @@ package com.teruuu.logic.crawler
 import java.sql.Timestamp
 import java.time.LocalDateTime
 
-import com.teruuu.infla.db.{ScalapTop, TopLink}
+import com.teruuu.infla.db.{LinkText, ScalapTop, TopLink}
 import org.jsoup.Jsoup
 import scalikejdbc.DB
 
@@ -88,6 +88,29 @@ object CrawlService {
   def links: List[TopLink] = {
     DB readOnly   { implicit session =>
       TopLink.topLinks
+    }
+  }
+
+  def searchLink(d: LocalDateTime) = {
+    DB readOnly   { implicit session =>
+      TopLink.selectNotTextSearch(d)
+    }
+  }
+
+  def addLinkText(topLink: Option[TopLink]) = {
+    topLink match {
+      case Some(x) =>
+        val text = Jsoup.connect(x.url).get.body.text
+        DB localTx  { implicit session =>
+          LinkText.insertLinkText(x.id, text, Timestamp.valueOf(LocalDateTime.now()))
+        }
+      case _ =>
+    }
+  }
+
+  def showLinkTexts: List[LinkText] = {
+    DB readOnly { implicit session =>
+      LinkText.selectAll
     }
   }
 }

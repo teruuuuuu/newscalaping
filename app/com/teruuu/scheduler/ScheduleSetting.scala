@@ -1,5 +1,6 @@
 package com.teruuu.scheduler
 
+import java.time.LocalDateTime
 import javax.inject._
 
 import akka.actor.ActorSystem
@@ -14,15 +15,22 @@ import scala.concurrent.Future
 @Singleton
 class ScheduleSetting @Inject() (lifecycle: ApplicationLifecycle) {
   // CrawlInterface.init
-
   val _system = ActorSystem("system")
+
   // スケジューラを生成
-  val scheduler = QuartzSchedulerExtension(_system)
-  val messagingActor = _system.actorOf(CrawlExecutor.props, "crawl")
-  scheduler.schedule(
-    "CrawlTask",
+  val crawlLinkSchedule = QuartzSchedulerExtension(_system)
+  val messagingActor = _system.actorOf(CrawlExecutor.props, "CrawlSchedule")
+  crawlLinkSchedule.schedule(
+    "CrawlTopLink",
     messagingActor,
-    "crawling"
+    "crawlTopLink"
+  )
+
+  val crawTextSchedule = QuartzSchedulerExtension(_system)
+  crawTextSchedule.schedule(
+    "CrawlLinkText",
+    messagingActor,
+    "crawlLinkText"
   )
 
   // Shut-down hook

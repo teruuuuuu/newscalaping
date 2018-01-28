@@ -1,8 +1,9 @@
 package com.teruuu.infla.db
 
 import java.sql.Timestamp
+import java.time.LocalDateTime
 
-import scalikejdbc.{AutoSession, DBSession, delete, ResultName, SQLSyntaxSupport, WrappedResultSet, insert, select, withSQL}
+import scalikejdbc.{AutoSession, DBSession, ResultName, SQL, SQLSyntaxSupport, WrappedResultSet, delete, insert, select, withSQL}
 
 case class TopLink(id: Int, top_id: Int, url: String, text: Option[String], add_date: Timestamp)
 
@@ -40,7 +41,7 @@ object TopLink extends SQLSyntaxSupport[TopLink] {
       select(tl.id, tl.top_id, tl.url, tl.text, tl.add_date).
         from(TopLink as tl).
         orderBy(tl.id).desc.
-        limit(300).
+        limit(1000).
         offset(0)
     }.map(TopLink(_)).list.apply()
 
@@ -51,4 +52,16 @@ object TopLink extends SQLSyntaxSupport[TopLink] {
         where.eq(tl.top_id, top_id).
         orderBy(tl.id)
     }.map(TopLink(_)).list.apply()
+
+  def selectNotTextSearch(date: LocalDateTime)(implicit session: DBSession = AutoSession):List[TopLink] = {
+    SQL("""
+          select id, top_id, url, text, add_date
+          from top_link
+          where
+            id not in (select link_id from link_text)
+            and add_date > ?""")
+      .bind(date)
+      .map(TopLink(_)).list.apply()
+  }
+
 }

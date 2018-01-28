@@ -40,7 +40,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
       )
   }
 
-  def tops = Action { implicit request: Request[AnyContent] => {
-    Ok(Json.toJson(CrawlInterface.showTopInfo))
-  }}
+//  def tops = Action { implicit request: Request[AnyContent] => {
+//    Ok(Json.toJson(CrawlInterface.showTopInfo))
+//  }}
 }

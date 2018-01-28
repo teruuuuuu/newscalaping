@@ -1,11 +1,14 @@
 package com.teruuu.logic.crawler
 
+import java.time.{LocalDate, LocalDateTime}
+
 import com.teruuu.infla.db.{ScalapTop, TopLink}
 
 // ドメインオブジェクトを利用して結果を返すインターフェース
 object CrawlInterface {
   def main(args: Array[String]): Unit ={
-    run
+    init
+    // run
   }
 
   def run = CrawlService.allTops.map(new ScalapEntity(_)).foreach(_.trace)
@@ -15,8 +18,7 @@ object CrawlInterface {
   }
 
   def addTop(url: String, title: String, description: String): Long = {
-    val scalap = ScalapEntity(url, title, description)
-    scalap.addTop
+    ScalapEntity(url, title, description).addTop
   }
 
   def deleteTop(id: Int) = {
@@ -33,5 +35,10 @@ object CrawlInterface {
 
   def topLinks(): List[TopLink] = {
     CrawlService.links
+  }
+  def crawlText(d: LocalDateTime) = {
+    val links = CrawlService.searchLink(d)
+    CrawlService.addLinkText(Option(links.head))
+
   }
 }

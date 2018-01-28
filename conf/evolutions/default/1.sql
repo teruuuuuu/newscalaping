@@ -1,10 +1,3 @@
-CREATE DATABASE scalaping
-  WITH OWNER = ***
-  ENCODING = 'UTF8'
-  TABLESPACE = pg_default
-  CONNECTION LIMIT = -1;
-
-
 CREATE TABLE "scrape_top" (
 "id" SERIAL PRIMARY KEY,
 "url" varchar(255) NOT NULL,
@@ -20,4 +13,3 @@ CREATE TABLE "top_link" (
 "text" text NOT NULL,
 "add_date" timestamp
 );
-

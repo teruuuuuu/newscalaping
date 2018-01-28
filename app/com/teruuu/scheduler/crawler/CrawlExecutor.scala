@@ -1,5 +1,7 @@
 package com.teruuu.scheduler.crawler
 
+import java.time.LocalDateTime
+
 import akka.actor.{Actor, ActorLogging, Props}
 
 class CrawlExecutor extends Actor with ActorLogging{
@@ -10,13 +12,18 @@ class CrawlExecutor extends Actor with ActorLogging{
   def receive = {
     case Initialize =>
       log.info("starting MessagingActor")
-    case "crawling" =>
-      receiveActor !  SendMessage("start crawl")
+    case "crawlTopLink" =>
+      receiveActor !  CrawlTopMessage("start crawl")
+    case "crawlLinkText" =>
+      receiveActor !  CrawlTextMessage(d)
   }
 }
 
 object CrawlExecutor {
+  // 開始日時
+  val d:LocalDateTime = LocalDateTime.now
   val props = Props[CrawlExecutor]
   case object Initialize
-  case class SendMessage(text: String)
+  case class CrawlTopMessage(text: String)
+  case class CrawlTextMessage(d: LocalDateTime)
 }
