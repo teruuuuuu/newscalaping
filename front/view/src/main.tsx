@@ -7,27 +7,36 @@ import { Provider } from 'react-redux'
 import './assets/bootstrap/css/bootstrap.min.css'
 import './assets/css/main.css'
 
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
+import * as injectTapEventPlugin from 'react-tap-event-plugin'
+
 import {  BrowserRouter, Route, Switch } from 'react-router-dom';
 import FirstComponent from './components/page/first-component';
 import ListComponent from './components/page/list-component';
-import TopPage from './components/page/top/top-page';
+import CrawlIndex from './components/page/crawler/crawl-index';
 
-import DatagridExample from './components/workspace/datagrid-example';
 import TabsExample from './components/workspace/tabs-example';
 
+injectTapEventPlugin()
 
 const store = StoreConfig({});
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={ TopPage as any } />
-        <Route exact path="/first" component={ FirstComponent as any } />
-        <Route exact path="/list" component={ ListComponent as any } />
-        <Route exact path="/abc" component={ DatagridExample as any } />
-        <Route exact path="/tab" component={ TabsExample as any } />
-      </Switch>
-    </BrowserRouter>
-  </Provider >
+  <div style={{color: "#555"}}>
+    <Provider store={store}>
+      <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={ CrawlIndex as any } />
+          <Route exact path="/first" component={ FirstComponent as any } />
+          <Route exact path="/list" component={ ListComponent as any } />
+          <Route exact path="/tab" component={ TabsExample as any } />
+        </Switch>
+      </BrowserRouter>
+      </MuiThemeProvider>
+    </Provider >
+  </div>
     ,document.getElementById("app")
 );

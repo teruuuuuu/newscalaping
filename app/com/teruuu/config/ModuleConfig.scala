@@ -7,7 +7,7 @@ import play.api.{Configuration, Environment}
 class ModuleConfig(environment: Environment,  configuration: Configuration) extends AbstractModule {
 
   def configure() = {
-    // bind(classOf[ScheduleSetting]).asEagerSingleton()
+    bind(classOf[ScheduleSetting]).asEagerSingleton()
   }
 }
 

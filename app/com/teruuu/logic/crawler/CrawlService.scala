@@ -84,4 +84,10 @@ object CrawlService {
       ScalapTop.deleteById(scalapTop.id)
     }
   }
+
+  def links: List[TopLink] = {
+    DB readOnly   { implicit session =>
+      TopLink.topLinks
+    }
+  }
 }

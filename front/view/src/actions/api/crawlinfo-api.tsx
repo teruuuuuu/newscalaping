@@ -24,3 +24,11 @@ export function  delete_top_info(id: number) {
   const data = {}
   return f.createRequestData( process.env.REQUEST_URL.TOP_INFO + "/" + id, 'JSON', 'DELETE',  data,  response_action);
 }
+
+export function  get_links_info() {
+  const response_action = function(data: any){
+    return {type: types.INIT_TOPLINKS_LIST, data: data}
+  }
+  const data = {}
+  return f.createRequestData( process.env.REQUEST_URL.LINKS_INFO, 'JSON', 'GET',  data,  response_action);
+}

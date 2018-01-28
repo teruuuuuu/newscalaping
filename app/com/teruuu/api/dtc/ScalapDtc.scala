@@ -1,10 +1,10 @@
 package com.teruuu.api.dtc
 
-import com.teruuu.infla.db.ScalapTop
+import com.teruuu.infla.db.{ScalapTop, TopLink}
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.data.Forms.mapping
-import play.api.libs.json.{Json, Writes}
+import play.api.libs.json.{JsValue, Json, Writes}
 
 trait ScalapDtc {
 
@@ -29,4 +29,14 @@ trait ScalapDtc {
     )(AddTop.apply)(AddTop.unapply)
   )
 
+  implicit val linkWrite = new Writes[TopLink] {
+    override def writes(o: TopLink): JsValue =
+      Json.obj(
+        "id" -> o.id,
+        "top_id" -> o.top_id,
+        "url" -> o.url,
+        "text" -> o.text,
+        "add_date" -> o.add_date.toString
+      )
+  }
 }

@@ -13,7 +13,7 @@ import scala.concurrent.Future
 // This creates an `ApplicationStart` object once at start-up and registers hook for shut-down.
 @Singleton
 class ScheduleSetting @Inject() (lifecycle: ApplicationLifecycle) {
-  CrawlInterface.init
+  // CrawlInterface.init
 
   val _system = ActorSystem("system")
   // スケジューラを生成

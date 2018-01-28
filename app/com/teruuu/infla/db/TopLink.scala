@@ -35,6 +35,15 @@ object TopLink extends SQLSyntaxSupport[TopLink] {
     }.update.apply()
 
 
+  def topLinks(implicit session: DBSession = AutoSession):List[TopLink] =
+    withSQL {
+      select(tl.id, tl.top_id, tl.url, tl.text, tl.add_date).
+        from(TopLink as tl).
+        orderBy(tl.id).desc.
+        limit(300).
+        offset(0)
+    }.map(TopLink(_)).list.apply()
+
   def selectByTopId(top_id: Int)(implicit session: DBSession = AutoSession):List[TopLink] =
     withSQL {
       select(tl.id, tl.top_id, tl.url, tl.text, tl.add_date).

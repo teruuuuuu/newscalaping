@@ -11,8 +11,9 @@ import play.api.mvc.{AbstractController, AnyContent, ControllerComponents, Reque
 @Singleton
 class ApiController @Inject()(cc: ControllerComponents) extends AbstractController(cc) with ScalapDtc {
 
+  // 監視対象(top)ページ
   def tops = Action { implicit request: Request[AnyContent] => {
-    Ok(Json.toJson(CrawlInterface.showTopInfo))
+    Ok(Json.toJson(CrawlInterface.showTopInfo.sortBy(-_.create_date.getTime)))
   }}
 
   def top(id: Int) = Action { implicit request: Request[AnyContent] => {
@@ -38,4 +39,10 @@ class ApiController @Inject()(cc: ControllerComponents) extends AbstractControll
     CrawlInterface.deleteTop(id)
     Ok(Json.toJson(CrawlInterface.showTopInfo))
   }}
+
+  // 監視対象ページのリンク情報
+  def links = Action { implicit request: Request[AnyContent] => {
+    Ok(Json.toJson(CrawlInterface.topLinks.sortBy(-_.add_date.getTime)))
+  }}
+
 }

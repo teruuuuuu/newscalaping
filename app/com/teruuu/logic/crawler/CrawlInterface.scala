@@ -1,6 +1,6 @@
 package com.teruuu.logic.crawler
 
-import com.teruuu.infla.db.ScalapTop
+import com.teruuu.infla.db.{ScalapTop, TopLink}
 
 // ドメインオブジェクトを利用して結果を返すインターフェース
 object CrawlInterface {
@@ -29,5 +29,9 @@ object CrawlInterface {
 
   def selectTopById(id: Int): Option[ScalapTop] = {
     CrawlService.selectTopById(id)
+  }
+
+  def topLinks(): List[TopLink] = {
+    CrawlService.links
   }
 }
