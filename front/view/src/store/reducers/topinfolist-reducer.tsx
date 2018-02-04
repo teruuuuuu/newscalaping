@@ -2,7 +2,7 @@ import { INIT_TOPINFO_LIST } from '../define';
 import {TopInfo} from '../../model/topinfo'
 
 const INITIAL_STATE = {
-    topinfo_list :[new TopInfo(0, 'url','tile', 'description', 'time')]
+    topinfo_list : new Array()
   };
 
 export default function topinfoListReducer(state = INITIAL_STATE, action: {type: string, data: any}) {

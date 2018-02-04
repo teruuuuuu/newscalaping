@@ -61,7 +61,7 @@ class TopPage extends React.Component<TopPageProps, TopPageState > {
   }
 
   render() {
-    const { topinfoList }= this.props 
+    const { topinfoList }= this.props
     const labelStyle = {
       marginTop: "5px",
       paddingRight: "15px",
@@ -83,14 +83,14 @@ class TopPage extends React.Component<TopPageProps, TopPageState > {
               <label style={labelStyle}>description</label><input type="text" name="description" className="form-control" style={textStyle} ref={"addDescription"}/>
               <button type="button" className="btn btn-primary" style={buttonStyle} onClick={this.addClick}>追加</button>
           </div>
-          <DTable 
+          <DTable
             topLinks={topinfoList}
             pageVolume={30}
             clickCell={this.clickCell}
             HEADER_INFO={this.HEADER_INFO}
           />
       </div>
-    );  
+    );
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TopPage);

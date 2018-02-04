@@ -27,7 +27,7 @@ class CrawlIndex extends React.Component<CrawlIndexProps, CrawlIndexState > {
     this.props.callApi(crawlInfoApi.get_top_info())
     this.props.callApi(crawlInfoApi.get_links_info())
   }
-  
+
   handleChange = (value: string) => {
     this.setState({});
   };

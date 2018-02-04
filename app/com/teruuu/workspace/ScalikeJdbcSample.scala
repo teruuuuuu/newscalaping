@@ -4,10 +4,10 @@ import java.time.LocalDateTime
 
 import com.teruuu.config.ApplicationConfig
 import com.teruuu.logic.crawler.CrawlService
-import scalikejdbc.{ConnectionPool, ConnectionPoolSettings}
+import scalikejdbc.{ConnectionPool, ConnectionPoolSettings, DB}
 
 object ScalikeJdbcSample {
-  def loadJDBCSettings(): Unit ={
+  private def loadJDBCSettings(): Unit ={
 
     val settings = ConnectionPoolSettings(
       initialSize = 5,
@@ -21,10 +21,9 @@ object ScalikeJdbcSample {
 
 
   def main(args: Array[String]) = {
-//    val d = LocalDateTime.now.withHour(12)
-//    println(CrawlService.allTops)
-//    println(CrawlService.searchLink(d))
-
-    println(CrawlService.showLinkTexts)
+    DB readOnly { implicit session =>
+      println(CrawlService.allTops)
+      println(CrawlService.showLinkTexts)
+    }
   }
 }

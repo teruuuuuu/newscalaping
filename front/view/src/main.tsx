@@ -19,6 +19,7 @@ import ListComponent from './components/page/list-component';
 import CrawlIndex from './components/page/crawler/crawl-index';
 
 import TabsExample from './components/workspace/tabs-example';
+import DialogExample from './components/workspace/dialog-example';
 
 injectTapEventPlugin()
 
@@ -33,6 +34,7 @@ ReactDOM.render(
           <Route exact path="/first" component={ FirstComponent as any } />
           <Route exact path="/list" component={ ListComponent as any } />
           <Route exact path="/tab" component={ TabsExample as any } />
+          <Route exact path="/dialog" component={ DialogExample as any } />
         </Switch>
       </BrowserRouter>
       </MuiThemeProvider>

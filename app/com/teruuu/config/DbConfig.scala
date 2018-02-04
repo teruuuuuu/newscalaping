@@ -1,11 +1,8 @@
 package com.teruuu.config
 
-import com.google.inject.AbstractModule
-import com.teruuu.scheduler.ScheduleSetting
-import play.api.{Configuration, Environment}
 import scalikejdbc.{ConnectionPool, ConnectionPoolSettings}
 
-class ModuleConfig(environment: Environment,  configuration: Configuration) extends AbstractModule {
+trait DbConfig {
   def loadJDBCSettings(): Unit ={
     val settings = ConnectionPoolSettings(
       initialSize = 5,
@@ -17,8 +14,4 @@ class ModuleConfig(environment: Environment,  configuration: Configuration) exte
   }
   loadJDBCSettings()
 
-  def configure() = {
-    // bind(classOf[ScheduleSetting]).asEagerSingleton()
-  }
 }
-

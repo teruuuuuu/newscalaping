@@ -4,7 +4,7 @@ import java.sql.Timestamp
 
 import scalikejdbc.{AutoSession, DBSession, delete, ResultName, SQLSyntaxSupport, WrappedResultSet, insert, select, withSQL}
 
-case class LinkText(id: Int, link_id: Int, text: String, add_date: Timestamp)
+case class LinkText(id: Int, link_id: Int, text: String, result: Int, result_status: String, add_date: Timestamp)
 
 object LinkText extends SQLSyntaxSupport[LinkText] {
   override val tableName = "link_text"
@@ -12,15 +12,15 @@ object LinkText extends SQLSyntaxSupport[LinkText] {
   val lc = LinkText.column
 
   def apply(rs: WrappedResultSet): LinkText =
-    LinkText(rs.int("id"), rs.int("link_id"), rs.string("text"), rs.timestamp("add_date"))
+    LinkText(rs.int("id"), rs.int("link_id"), rs.string("text"), rs.int("result"), rs.string("result_status"), rs.timestamp("add_date"))
 
   def apply(t: ResultName[LinkText])(rs: WrappedResultSet): LinkText =
-    LinkText(rs.int(t.id), rs.int(t.link_id), rs.string(t.text), rs.timestamp(t.add_date))
+    LinkText(rs.int(t.id), rs.int(t.link_id), rs.string(t.text), rs.int(t.result), rs.string(t.result_status), rs.timestamp(t.add_date))
 
 
-  def insertLinkText(link_id: Int, text:String, add_date: Timestamp)(implicit session: DBSession = AutoSession): Long =
+  def insertLinkText(link_id: Int, text:String, result: Int, result_status: String, add_date: Timestamp)(implicit session: DBSession = AutoSession): Long =
     withSQL {
-      insert.into(LinkText).namedValues(lc.link_id -> link_id, lc.text -> text, lc.add_date -> add_date)
+      insert.into(LinkText).namedValues(lc.link_id -> link_id, lc.text -> text, lc.result -> result, lc.result_status -> result_status, lc.add_date -> add_date)
     }.updateAndReturnGeneratedKey.apply()
 
   def deleteById(id: Int)(implicit session: DBSession = AutoSession) =

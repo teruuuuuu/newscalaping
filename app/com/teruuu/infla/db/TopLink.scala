@@ -64,4 +64,15 @@ object TopLink extends SQLSyntaxSupport[TopLink] {
       .map(TopLink(_)).list.apply()
   }
 
+  def selectNotTextSearchById(topId: Int, date: LocalDateTime)(implicit session: DBSession = AutoSession):List[TopLink] = {
+    SQL("""
+          select id, top_id, url, text, add_date
+          from top_link
+          where
+            id not in (select link_id from link_text)
+            and add_date > ?
+            and top_id = ?""")
+      .bind(date, topId)
+      .map(TopLink(_)).list.apply()
+  }
 }

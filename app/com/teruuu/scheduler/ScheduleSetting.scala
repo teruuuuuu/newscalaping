@@ -1,19 +1,12 @@
 package com.teruuu.scheduler
 
-import java.time.LocalDateTime
-import javax.inject._
-
 import akka.actor.ActorSystem
-import com.teruuu.logic.crawler.CrawlInterface
+import com.teruuu.config.DbConfig
 import com.teruuu.scheduler.crawler.CrawlExecutor
 import com.typesafe.akka.extension.quartz.QuartzSchedulerExtension
-import play.api.inject.ApplicationLifecycle
-
-import scala.concurrent.Future
 
 // This creates an `ApplicationStart` object once at start-up and registers hook for shut-down.
-@Singleton
-class ScheduleSetting @Inject() (lifecycle: ApplicationLifecycle) {
+object ScheduleSetting extends DbConfig {
   // CrawlInterface.init
   val _system = ActorSystem("system")
 
@@ -33,9 +26,7 @@ class ScheduleSetting @Inject() (lifecycle: ApplicationLifecycle) {
     "crawlLinkText"
   )
 
-  // Shut-down hook
-  lifecycle.addStopHook { () => {
-    Future.successful(())
-  }}
-
+  def main(args: Array[String]): Unit = {
+    println("schedler start")
+  }
 }
